@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Meine Lern-Website</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Video-Hintergrund -->
+<video autoplay muted loop id="bgVideo">
+<source src="sakura1.mp4" type="video/mp4">
+Dein Browser unterstützt das Video nicht.
+</video>
+<!-- To-Do Liste Widget -->
+<div class="todo-widget">
+  <h2>To-Do Liste</h2>
+  <input type="text" id="todo-input" placeholder="Neue Aufgabe..." />
+  <button id="add-todo">Hinzufügen</button>
+  <ul id="todo-list"></ul>
+</div>
+
+<!-- Content: Text + Button -->
+<div class="content" id="mainContent">
+<h1 id="mainText">Hallo!</h1>
+<p id="subText">Willkommen auf meiner Lern-Website.</p>
+<button id="magicButton">CLICK IT</button>
+</div>
+
+<div class="clock" id="clock">
+  <div class="hand hour" id="hour"></div>
+  <div class="hand minute" id="minute"></div>
+  <div class="hand second" id="second"></div>
+  <div class="center"></div>
+</div>
+
+<!-- Musik-Datei -->
+<button id="playAudio">🎵</button>
+<audio id="player"></audio>
+<div class="music-bars" id="musicBars"></div>
+<div class="flashcard-container">
+<button class="nav-btn" id="prevBtn">⟵</button>
+
+<!--flashcards-->
+<div class="flashcards-container">
+<div class="flashcard" id="flashcard">
+<div class="card-inner">
+<div class="card-front" id="cardQuestion">Definiton: stabile Schichtung</div>
+<div class="card-back" id="cardAnswer">Antwort: T. in Umgebung ist höher als im bewegten luftpaket, es kommt nicht zur Wolkenbildung, da aufsteigende Luft kälter und dichter ist als umgebende Luft, Luftpaket kann nicht weiter aufsteigen</div>
+</div>
+</div>
+<button class="nav-btn" id="nextBtn">⟶</button>
+
+<div class="flashcard" id="flashcard2">
+  <div class="card-inner">
+    <div class="card-front" id="cardQuestion2">Frage A</div>
+    <div class="card-back" id="cardAnswer2">Antwort A</div>
+  </div>
+</div>
+</div>
+
+<button class="nav-btn" id="nextBtn2">⟶</button>
+<button class="nav-btn" id="prevBtn2">⟵</button>
+
+<div class="spacer"></div>
+<!-- JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>
