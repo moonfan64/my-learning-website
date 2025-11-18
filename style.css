@@ -1,8 +1,30 @@
+/* Responsive improvements for iOS tablets and small screens */
+
+/* Make sizing predictable across browsers */
+*, *::before, *::after {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent iOS font-size auto-adjustment */
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
 /* Body und HTML auf volle Höhe */
 html, body {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
+}
+
+/* Add safe-area support for iOS notches */
+body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* Video als Hintergrund */
@@ -17,7 +39,10 @@ html, body {
     opacity: 0.8;
 }
 
-/* Content zentrieren */
+/* Content zentrieren
+   - Keep centered on large screens with absolute positioning.
+   - Switch to normal document flow on smaller screens to avoid overlap/squeezing.
+*/
 .content {
     position: absolute;
     top: 52%;
@@ -28,10 +53,12 @@ html, body {
     text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
     z-index: 1;
     background-color: rgba(175,220,253,0.8);
-    padding: 30px 50px;
+    /* use clamp for padding so it scales */
+    padding: clamp(12px, 3vw, 30px) clamp(20px, 4vw, 50px);
     border-radius: 20px; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    opacity: 0.9;
+    opacity: 0.95;
+    max-width: min(90vw, 800px);
 }
 
 /* Button-Styling */
@@ -42,12 +69,13 @@ button {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
     font-size: 16px;
 }
 
 button:hover {
-    transform: scale(1.2);
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
 }
 
 /* Analoguhr */
@@ -63,6 +91,9 @@ button:hover {
     background: rgba(204, 238, 255, 0.25);
     box-shadow: 0 8px 20px rgba(0,0,0,0.5);
     z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hand {
@@ -101,7 +132,8 @@ button:hover {
     font-family: Arial, sans-serif;
     backdrop-filter: blur(4px);
     transition: all 0.3s ease;
-    opacity: 0.8;
+    opacity: 0.9;
+    max-width: 90vw;
 }
 
 .todo-widget h2 {
@@ -135,12 +167,13 @@ button:hover {
     padding-left: 0;
     max-height: 200px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .todo-widget li {
     padding: 6px;
     margin-bottom: 6px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 6px;
     display: flex;
     justify-content: space-between;
@@ -195,6 +228,9 @@ button:hover {
     width: 500px;
     height: 400px;
     perspective: 1000px;
+    max-width: 90vw;
+    height: auto;
+    aspect-ratio: 5 / 4;
 }
 
 .card-inner {
@@ -219,12 +255,13 @@ button:hover {
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.95);
     color: black;
     border: 2px solid rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     padding: 10px;
     text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
 .card-back {
@@ -238,17 +275,57 @@ button:hover {
 
 /* ---------------- Media Queries ---------------- */
 
-/* iPad Portrait */
-@media (max-width: 834px) {
-    .todo-widget { top: 30%; width: 70%; }
-    .clock { width: 300px; height: 300px; top: 10%; }
-    .flashcards-container { margin-top: 40vh; }
+/* iPad Portrait and similar tablets (<= 1024px)
+   - Switch widgets into normal flow (stacked) so they don't overlap/squeeze.
+   - Reduce sizes and use relative widths/heights.
+*/
+@media (max-width: 1024px) {
+    /* put everything into normal document flow to avoid absolute overlap */
+    .content,
+    .todo-widget,
+    .clock,
+    .flashcards-container,
+    .music-bars {
+        position: static !important;
+        transform: none !important;
+        left: auto !important;
+        top: auto !important;
+        right: auto !important;
+        margin: 18px auto;
+        width: min(92vw, 900px);
+    }
+
+    .content { padding: clamp(12px, 4vw, 28px); border-radius: 14px; }
+    .todo-widget { padding: 18px 20px; width: min(92vw, 420px); }
+    .clock { width: 220px; height: 220px; margin: 12px auto; border-width: 10px; }
+    .flashcards-container { margin-top: 6vh; gap: 20px; }
+    .flashcard { width: min(92vw, 480px); aspect-ratio: 5 / 4; }
+    .music-bars { margin: 8px auto; height: 70px; gap: 3px; }
+
+    /* make text and buttons scale nicely */
+    button { font-size: clamp(14px, 2.4vw, 16px); padding: 8px 14px; }
+    .card-front, .card-back { font-size: clamp(14px, 2.4vw, 18px); padding: 12px; }
 }
 
-/* iPad Landscape */
+/* Narrow phones / small devices */
+@media (max-width: 600px) {
+    .content, .todo-widget, .flashcards-container {
+        width: 94vw;
+        padding: 12px;
+        margin: 12px auto;
+    }
+
+    .clock { width: 180px; height: 180px; border-width: 8px; }
+    .flashcard { width: 92vw; aspect-ratio: 5 / 4; }
+    .music-bars { height: 50px; gap: 2px; }
+}
+
+/* iPad Landscape (original breakpoints kept but improved) */
 @media (min-width: 835px) and (max-width: 1200px) {
     .todo-widget { top: 25%; width: 60%; }
     .clock { width: 350px; height: 350px; top: 15%; }
     .flashcards-container { margin-top: 45vh; }
-}
 
+    /* but ensure max-width doesn't allow overflow */
+    .todo-widget, .content, .flashcard { max-width: 90vw; }
+}
