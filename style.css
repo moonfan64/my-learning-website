@@ -122,7 +122,7 @@ button:hover {
 .todo-widget {
     position: absolute;
     top: 35%;
-    left: 50%;
+    left: 35%;
     transform: translateX(-50%);
     width: 100px;
     background-color: rgba(175,220,253,0.8);
@@ -329,4 +329,5 @@ button:hover {
     /* but ensure max-width doesn't allow overflow */
     .todo-widget, .content, .flashcard { max-width: 90vw; }
 }
+
 
