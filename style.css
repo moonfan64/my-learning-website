@@ -75,7 +75,7 @@ transform: scale(1.2);
 }
 .hour { width: 12px; height: 100px; bottom: 50%; }
 .minute { width: 8px; height: 140px; bottom: 50%; }
-.second { width: 4px; height: 170px; bottom: 50%; background: #66b3ff; }
+.second { width: 4px; height: 170px; bottom: 50%; background: #66b3ff !important; }
 
 .center {
   position: absolute;
@@ -247,3 +247,4 @@ transform: rotateY(180deg);
 .spacer {
 	height:1500px;
 }
+
