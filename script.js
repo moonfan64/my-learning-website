@@ -71,13 +71,13 @@ const player = document.getElementById("player");
 const playButton = document.getElementById("playAudio");
 
 const tracks = [
-  "sounds/music1.mp3",
-  "sounds/music2.mp3",
-  "sounds/music3.mp3",
-  "sounds/music4.mp3",
-  "sounds/music5.mp3",
-  "sounds/music6.mp3",
-  "sounds/music7.mp3"
+  "music1.mp3",
+  "music2.mp3",
+  "music3.mp3",
+  "music4.mp3",
+  "music5.mp3",
+  "music6.mp3",
+  "music7.mp3"
 ];
 
 let current = 0;
@@ -231,4 +231,5 @@ prevBtn2.addEventListener("click", () => {
 });
 
 updateFlashcard2();
+
 
