@@ -235,8 +235,10 @@ button:hover {
 /* Responsive für Tablets und kleinere Geräte */
 @media (max-width: 1024px) {
     .clock {
-        width: 150px;
-        height: 150px;
+        width: 40%;
+        max-width: 150px;
+        height: 40%;
+        max-height: 150px;
     }
 
     .hand.hour { height: 50px; width: 8px; }
@@ -270,4 +272,5 @@ button:hover {
     .content { padding: 15px; font-size: 14px; }
     .flashcards-container { gap: 20px; }
 }
+
 
