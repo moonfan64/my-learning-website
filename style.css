@@ -191,7 +191,8 @@ user-select: none;
 }
 
 .flashcard {
-width: 500px;
+width: 90%;
+max-width: 500px;
 height: 400px;
 perspective: 1000px;
 }
@@ -245,4 +246,5 @@ transform: rotateY(180deg);
 }
 .spacer {
 	height:1500px;
+
 }
